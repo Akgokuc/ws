@@ -27,7 +27,7 @@ app.get('/',(req,res)=>{
     return res.sendFile('./public/index.html')
 })
 
-server.listen(9000, () => console.log('server started at PORT:9000'))
+server.listen(port, () => console.log('server started at PORT:9000'))
 
 
  
