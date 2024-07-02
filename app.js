@@ -6,28 +6,27 @@ const path = require('path')
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
+const PORT = 9000
 
+app.use(express.static(path.resolve('./public')))
 
+// Websocket functionality
 io.on('connection',socket =>{
-    console.log('New user connected',socket.id)
+    console.log('New connection made',socket.id)
 
     socket.on('user-message', message => {
-        console.log('A new user message',message)
+        console.log('User message: ',message)
 
         io.emit('message',message)
     })
 })
 
-
-
-
-app.use(express.static(path.resolve('./public')))
-
+// Route declaration
 app.get('/',(req,res)=>{
     return res.sendFile('./public/index.html')
 })
 
-server.listen(9000, () => console.log('server started at PORT:9000'))
+server.listen(PORT, () => console.log(`server started at PORT: ${PORT}`))
 
 
  
